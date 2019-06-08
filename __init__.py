@@ -37,6 +37,7 @@ class MovieMaster(MycroftSkill):
 			except Exception:
 				self.speak_dialog("no.valid.api", {})
 				self.speak("Falling back to the default A P I")
+				TMDB.api_key = __api__
 			
 		# Get search depth
 		self.searchDepth = self.settings.get("searchDepth")
@@ -256,6 +257,9 @@ class MovieMaster(MycroftSkill):
 					popularDialog = popularDialog + ", " + movie.title
 			popularDialog = popularDialog + " and {}".format(lastMovie.title)
 			self.speak_dialog("movie.popular", {"popularlist": popularDialog})
+		except:
+			# Keep this for future use
+			pass
 
 	@intent_file_handler("movie.top.intent")
 	def handle_top_movies(self, message):
@@ -276,6 +280,9 @@ class MovieMaster(MycroftSkill):
 					topDialog = topDialog + ", {}".format(movie.title)
 			topDialog = topDialog + " and {}".format(lastMovie.title)
 			self.speak_dialog("movie.top", {"toplist": topDialog})
+		except:
+			# Keep this here for future use
+			pass
 		
 def create_skill():
 	return MovieMaster()
